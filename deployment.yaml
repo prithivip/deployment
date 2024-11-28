@@ -1,0 +1,53 @@
+- name: Create K8S resource
+  hosts: proxy-servers
+  tasks:
+  - name: Get K8S namespace
+    kubernetes.core.k8s:
+      name: my-namespace
+      api_version: v1
+      kind: Namespace
+      state: present
+
+- name: Application Deployment
+  hosts: proxy-servers
+  tasks:
+    - name: Create a Deployment
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: myapp
+            namespace: my-namespace
+          spec:
+            replicas: 3
+            selector:
+              matchLabels:
+                app: myapp
+            template:
+              metadata:
+                labels:
+                  app: myapp
+              spec:
+                containers:
+                  - name: myapp-container
+                    image: nginx:latest
+                    ports:
+                      - containerPort: 80
+
+    - name: Expose Deployment as a Service
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myapp-service
+            namespace: my-namespace
+          spec:
+            selector:
+              app: myapp
+            ports:
+              - protocol: TCP
+                port: 80
+                targetPort: 80
+            type: LoadBalancer
