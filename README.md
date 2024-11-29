@@ -18,7 +18,9 @@ my-namespace      Active   52m
 
 
 kubectl create namespace argocd
+
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
 kubectl get -n argocd all
 
 root@proxy:~# k get namespace -ALL
@@ -45,6 +47,7 @@ pod/argocd-notifications-controller-5b9566d4c7-d5rzf    1/1     Running   0     
 pod/argocd-redis-665dd47d9b-6jt4f                       1/1     Running   0          135m
 pod/argocd-repo-server-fc97bfb4d-ftgfs                  1/1     Running   0          135m
 pod/argocd-server-69754c4fb-zrwch                       1/1     Running   0          135m
+
 
 NAME                                              TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 service/argocd-applicationset-controller          ClusterIP      10.101.143.230   <none>        7000/TCP,8080/TCP            135m
