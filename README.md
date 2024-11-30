@@ -23,19 +23,27 @@ root@proxy:~# k get -n argocd all
 
 
 k get secret -n argocd argocd-initial-admin-secret -o yaml
+
 echo "YVVIUDB4Um9KSm9ZTkpsRA==" | base64 -d
 
 Using the password you can login to UI using https://34.56.64.29:30268
 
 Now we install argocd CLI in kmaster
+
 curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+
 chmod +x /usr/local/bin/argocd
+
 argocd version
 
 export ARGOCD_SERVER=34.56.64.29:30268
+
 export ARGO_PWD=aUHP0xRoJJoYNJlD
+
 argocd login $ARGOCD_SERVER --username admin --password $ARGO_PWD --insecure
+
 'admin:login' logged in successfully
+
 Context '34.56.64.29:30268' updated
 
 Now we tested Argo login in CLI. Lets login to UI https://34.56.64.29:30268 and change password for admin user by clicking User Info followed by UPDATE PASSWORD
