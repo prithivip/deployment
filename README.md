@@ -77,7 +77,3 @@ root@proxy:~# k get deploy -n my-namespace
 root@proxy:~# k get pods -n my-namespace
 
 root@proxy:~# k get rs -n my-namespace
-NAME                DESIRED   CURRENT   READY   AGE
-my-app-7d7dbb4d95   10        10        10      74m
-
-
